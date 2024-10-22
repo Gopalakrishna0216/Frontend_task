@@ -1,0 +1,98 @@
+<mat-tab-group>
+  <mat-tab label="First">
+
+    <form [formGroup]="GeneralForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Customer Name</mat-label>
+        <input type="text" placeholder="Pick one" aria-label="Number" matInput formControlName="Customername"
+          [matAutocomplete]="auto" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <!-- Customer Mobile -->
+
+      <!-- <mat-form-field class="example-full-width">
+        <mat-label>Customer Mobile</mat-label>
+        <input matInput placeholder="Ex. Pizza" type="text" />
+      </mat-form-field> -->
+      <!-- <mat-form-field>
+        <mat-label>Customer status</mat-label>
+        <mat-select formControlName="status" multiple>
+          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <mat-form-field>
+        <mat-label>Customer Status</mat-label>
+        <mat-select formControlName="CustomerStatus">
+          <mat-option value="Active">Active</mat-option>
+          <mat-option value="Inactive">Inactive</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Customer Known Languages</mat-label>
+        <mat-select formControlName="knownLanguages" multiple>
+          <mat-option *ngFor="let language of LanguagesList" [value]="language">{{language}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-tab>
+
+  <!-- Address tabs -->
+
+
+  <mat-tab label="Address">
+    <!-- Country Tab -->
+
+    <form [formGroup]="AddressForm">
+      <mat-form-field class="example-full-width">
+        <mat-label>Country</mat-label>
+        <input type="text" placeholder="Select a country" matInput formControlName="Country"
+          [matAutocomplete]="autoCountry" />
+        <mat-autocomplete #autoCountry="matAutocomplete">
+          <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+            {{ country }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+
+      <!-- State Tab -->
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>State</mat-label>
+        <input type="text" placeholder="Select a state" matInput formControlName="States"
+          [matAutocomplete]="autoState" />
+        <mat-autocomplete #autoState="matAutocomplete">
+          <mat-option *ngFor="let state of filteredStates | async" [value]="state"
+            (onSelectionChange)="OnStateSelected($event)">
+            {{ state }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+
+      <!-- City Tab -->
+
+
+      <mat-form-field class="example-full-width">
+        <mat-label>City</mat-label>
+        <input type="text" placeholder="Select a city" matInput formControlName="City" [matAutocomplete]="autoCity" />
+        <mat-autocomplete #autoCity="matAutocomplete">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </mat-tab>
+</mat-tab-group>
+<button mat-raised-button color="primary" type="button" (click)="Submit()">Submit</button>
